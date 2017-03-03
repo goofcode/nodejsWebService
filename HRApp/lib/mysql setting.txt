@@ -1,0 +1,35 @@
+CREATE TABLE Team(
+team_id int not null auto_increment primary key,
+team_name char(30) not null
+);
+
+CREATE TABLE Employee(
+emp_id int not null auto_increment primary key,
+emp_name char(30) not null,
+team_id int not null,
+FOREIGN KEY(team_id) REFERENCES Team(team_id) 
+);
+
+CREATE TABLE Account(
+acc_id int not null auto_increment primary key,
+acc_email char(50) not null,
+acc_password char(64) not null,
+acc_level int not null
+);
+
+CREATE TABLE SignupRequest(
+req_acc_id int not null auto_increment primary key,
+req_email char(50) not null,
+req_password char(64) not null
+);
+
+INSERT INTO Team(team_id, team_name) VALUES(1001, 'Human Resources');
+INSERT INTO Team(team_name) VALUES('Resource Management');
+INSERT INTO Team(team_name) VALUES('Security');
+
+INSERT INTO Employee(emp_id, emp_name, team_id) VALUES(1, 'SUN PARK', 1001);
+INSERT INTO Employee(emp_name, team_id) VALUES('MOO JI', 1003);
+INSERT INTO Employee(emp_name, team_id) VALUES('JOHN TAYLOR', 1002);
+INSERT INTO Employee(emp_name, team_id) VALUES('DOROTHY ALLEN', 1003);
+
+INSERT INTO Account(acc_id, acc_email, acc_password, acc_level) VALUES(1, 'llnntms@gmail.com', '55be2dd456d3716de7aa82aeba61232723fd0c93e92b75010cc21979883a6897', 0);

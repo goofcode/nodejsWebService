@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+    <title>HR App</title>
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <link rel="stylesheet" href="/css/style.css"> 
+</head>
+<body>
+    <div class="header">
+        <div id="header-title"><h2>LLNNTMS Project - HR App</h2></div><br>
+        <ul class="nav nav-pills">
+            <li id="menu_home" role="presentation"><a href="/">Home</a></li>
+            
+            <% if(loggedIn){ %>
+                <li id="menu_employees" role="presentation"><a href="/employees">Employees</a></li>
+                <li id="menu_teams" role="presentation"><a href="/teams">Teams</a></li>
+                
+                <% if(loginLevel == 0){ %>
+                    <li id="menu_teams" class="active" role="presentation"><a href="/accounts">Accounts</a></li>
+                    <li id="menu_teams" role="presentation"><a href="/signuprequest">Signup Request</a></li>
+                <% } %>
+            <% } %>
+            
+        </ul><br><br>
+    </div>    
+    
+    <div class="container">
+        <% JSON.parse(accounts).forEach(function(account){ %>
+        <div class="col-xs-12 col-sm-6 col-lg-4">
+            <div class="panel panel-default employee-list-item">
+                <div class="panel-body">
+                    <div class="icon-container"><i class="fa fa-3x fa-user"></i></div>
+                    <div class="text-container">
+                        <%=account.acc_email%><br>
+                        LEVEL <%=account.acc_level%>
+                    </div>
+                </div>    
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</body>
+</html>

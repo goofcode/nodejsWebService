@@ -1,0 +1,94 @@
+body{
+  background: url('/imgs/background.png');
+  background-repeat: repeat;
+  min-width: 320px;
+}
+
+.header{
+  margin-left: 30px;
+}
+
+.menu .li{
+  margin-right:10px;
+}
+
+span.label.label-danger.login {
+    margin-left: 380px;
+}
+span.label.label-danger.signup {
+    margin-left: 350px;
+}
+.nav-pills>li {
+    margin-right: 8px;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
+  background-color: #4C7577;
+}
+.employee-list-tiem .panel-body{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+}
+
+.employee-list-tiem .panel-body > * {
+  -webkit-align-self: center;
+  align-self: center;
+  -ms-flex-item-align: center;
+}
+
+.employee-list-tiem .panel-body .btn{
+  margin-left: auto;
+}
+
+.employee-avatar{
+  height: 200px;
+  width: 200px;
+  border-radius: 6px;
+}
+
+.employee-detail{
+  margin-left: 20px;
+}
+
+.employee-detail .btn .btn-default{
+  
+}
+
+div.icon-container{
+  display: inline-block;
+  text-align: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #3498db;
+  margin-top: 20px;
+  margin-right: 15px;
+  border-radius: 4px;
+  float: left;
+}
+div.text-container{
+  width: 180px;
+  height: 48px;
+  margin-top: 20px;
+  float: left;
+}
+
+div.view-button{
+  float: right;
+}
+
+
+div.button-bar{
+  text-align: left;
+  margin-bottom: 10px;
+}  
+
+div.form-offset{
+  padding-top: 15px;
+}
+
+.margin-top-reset{
+  margin-top: 0;
+}

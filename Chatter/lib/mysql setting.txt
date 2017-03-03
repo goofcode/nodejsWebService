@@ -1,0 +1,74 @@
+CREATE DATABASE chatterDB;
+
+
+#create tables
+
+USE chatterDB;
+
+CREATE TABLE User(
+userID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+userName char(30) NOT NULL,
+userPW char(64) NOT NULL
+);
+
+CREATE TABLE Room(
+roomID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+roomName TEXT CHARACTER SET utf8 NOT NULL
+);
+
+CREATE TABLE UserRoomRelation(
+relationID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+userID int NOT NULL,
+roomID int NOT NULL,
+
+FOREIGN KEY(userID) REFERENCES User(userID),
+FOREIGN KEY(roomID) REFERENCES Room(roomID)
+);
+
+CREATE TABLE LoggedInUser(
+userID int NOT NULL,
+loggedInTime DATETIME NOT NULL
+);
+
+CREATE TABLE Message(
+messageID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+datetime DATETIME NOT NULL,
+roomID int NOT NULL,
+senderID int NOT NULL,
+text TEXT CHARACTER SET utf8 NOT NULL,
+readBy TEXT,                                            #JSON array of userIDs who read this message(stringified)
+
+FOREIGN KEY(roomID) REFERENCES Room(roomID),
+FOREIGN KEY(senderID) REFERENCES User(userID)
+);
+
+
+#populate
+
+INSERT INTO User(userID, userName, userPW) VALUES(1, 'llnntms1', '55be2dd456d3716de7aa82aeba61232723fd0c93e92b75010cc21979883a6897');
+INSERT INTO User(userID, userName, userPW) VALUES(2, 'llnntms2', '55be2dd456d3716de7aa82aeba61232723fd0c93e92b75010cc21979883a6897');
+INSERT INTO User(userID, userName, userPW) VALUES(3, 'llnntms3', '55be2dd456d3716de7aa82aeba61232723fd0c93e92b75010cc21979883a6897');
+INSERT INTO User(userID, userName, userPW) VALUES(4, 'llnntms4', '55be2dd456d3716de7aa82aeba61232723fd0c93e92b75010cc21979883a6897');
+
+
+INSERT INTO Room(roomID, roomName) VALUES(1, 'testroom1');
+INSERT INTO Room(roomID, roomName) VALUES(2, 'testroom2');
+INSERT INTO Room(roomID, roomName) VALUES(3, 'testroom3');
+
+
+INSERT INTO UserRoomRelation(userID, roomID) VALUES(1, 1);
+INSERT INTO UserRoomRelation(userID, roomID) VALUES(1, 2);
+INSERT INTO UserRoomRelation(userID, roomID) VALUES(1, 3);
+INSERT INTO UserRoomRelation(userID, roomID) VALUES(2, 1);
+INSERT INTO UserRoomRelation(userID, roomID) VALUES(2, 2);
+INSERT INTO UserRoomRelation(userID, roomID) VALUES(3, 2);
+INSERT INTO UserRoomRelation(userID, roomID) VALUES(3, 3);
+INSERT INTO UserRoomRelation(userID, roomID) VALUES(4, 1);
+INSERT INTO UserRoomRelation(userID, roomID) VALUES(4, 3);
+
+
+INSERT INTO Message(datetime, roomID, senderID, text) VALUES('2016-04-25 09:01:00', 1, 1, 'first message');
+INSERT INTO Message(datetime, roomID, senderID, text) VALUES('2016-04-25 09:02:00', 1, 2, 'second message');
+INSERT INTO Message(datetime, roomID, senderID, text) VALUES('2016-04-25 09:03:00', 1, 3, 'third message');
+
+

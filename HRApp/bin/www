@@ -1,0 +1,8 @@
+var debug = require('debug')('example-server');
+var app = require('../app.js');
+
+app.set('port', process.env.PORT);
+
+var server = app.listen(app.get('port'), function(){
+    debug('Express Server listening on port ' + server.address().port);
+});

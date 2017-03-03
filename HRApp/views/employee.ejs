@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <title>HR App</title>
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <link rel="stylesheet" href="/css/style.css">    
+</head>
+<body>
+    <div class="header">
+        <div id="header-title"><h2>LLNNTMS Project - HR App</h2></div><br>
+        <ul class="nav nav-pills">
+            <li id="menu_home" role="presentation"><a href="/">Home</a></li>
+            
+            <% if(loggedIn){ %>
+                <li id="menu_employees" class="active" role="presentation"><a href="/employees">Employees</a></li>
+                <li id="menu_teams" role="presentation"><a href="/teams">Teams</a></li>
+                
+                <% if(loginLevel == 0){ %>
+                    <li id="menu_teams" role="presentation"><a href="/accounts">Accounts</a></li>
+                    <li id="menu_teams" role="presentation"><a href="/signuprequest">Signup Request</a></li>
+                <% } %>
+            <% } %>
+            
+        </ul><br><br>
+    </div>    
+    <div class="employee-detail">
+        <button type="button" class="btn btn-default" onclick="location.href='/employees/edit/<%=emp_id%>'">Edit</button>
+        <button type="button" class="btn btn-default" onclick="location.href='/employees/remove/<%=emp_id%>'">Remove</button>
+        <div>
+            <label>Name : </label><%=emp_name%>
+        </div>
+        <div>
+            <label>Team : </label><%=team_name%>
+        </div>
+    </div>
+</body>
+</html>
+

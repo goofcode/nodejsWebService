@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+    <title>Chatter</title>
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <link rel="stylesheet" href="/css/style.css">    
+</head>
+<body>
+    <div class="header">
+        <div id="header-title"><h2>LLNNTMS Project - Chatter</h2></div><br>
+    </div>    
+    <div class="container">
+      <ul id="chat-list">
+        <% roomsInfo.forEach(function(roomInfo){ %>
+            >><a href="/chat/<%=roomInfo.roomID%>"><%=roomInfo.roomName%></a><br>
+        <%  }) %>
+        <li><a href="/addchat">Add Chat!</a></li>
+        <a href="/logout">logout</a>
+      </ul>
+    </div>
+    </body>
+</html>

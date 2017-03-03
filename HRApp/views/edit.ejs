@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+    <title>HR App</title>
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <link rel="stylesheet" href="/css/style.css">    
+</head>
+<body>
+    <div class="header">
+        <div id="header-title"><h2>LLNNTMS Project - HR App</h2></div><br>
+        <ul class="nav nav-pills">
+            <li id="menu_home" role="presentation"><a href="/">Home</a></li>
+            
+            <% if(loggedIn){ %>
+                <li id="menu_employees" class="active" role="presentation"><a href="/employees">Employees</a></li>
+                <li id="menu_teams" role="presentation"><a href="/teams">Teams</a></li>
+                
+                <% if(loginLevel == 0){ %>
+                    <li id="menu_teams" role="presentation"><a href="/accounts">Accounts</a></li>
+                    <li id="menu_teams" role="presentation"><a href="/signuprequest">Signup Request</a></li>
+                <% } %>
+            <% } %>
+            
+        </ul><br><br>
+    </div>    
+    <div>
+        <form action="/employees/edit/<%=emp_id%>" method="post">
+            <div>
+                <label>Name</label>
+                <input type="text" name="emp_name" value="<%=emp_name%>">
+            </div>
+            <div>
+                <label>Team</label>
+                <select name="team_id">
+                    <%JSON.parse(all_team_names).forEach(function(one_team_name){%>
+                        <%if(team_name == one_team_name.team_name){%>
+                            <option value="<%=one_team_name.team_id%>" selected><%=one_team_name.team_name%></option>
+                        <% }else{%>
+                            <option value="<%=one_team_name.team_id%>"><%=one_team_name.team_name%></option><% }%>
+                    <% });%>
+                </select>
+            </div>
+            <button type="submit">Modify</button>
+        </form>
+   </div>
+</body>
+</html>
+

@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+    <title>Chatter</title>
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <link rel="stylesheet" href="/css/style.css">    
+</head>
+<body>
+    <!--form for searching user-->
+    <input id="search-text" type="text">
+    <button id="user-add">Add</button><br>
+
+    <!--form for set chat room config-->
+    <label>Room Name :</label><input type="text" id="room-name"><br>
+    <label>Invited :</label><ul id="invited"></ul> 
+    <button id="submit">Submit</button>  
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>    
+    <script>
+        var selectedUsers = [];
+        var selectedUserIDs = [];
+        
+        $('#user-add').click(function(){
+            var userNameInput = $('#search-text').val();
+             
+            if (userNameInput == '<%=userName%>') alert('Can\'t invite yourself');
+            
+            else{
+                $.post('/checkusername', {userName:userNameInput}, function(result){
+                    if(result.exist){
+                        selectedUsers.push(userNameInput);
+                        selectedUserIDs.push(result.userID);
+                        
+                        $('#invited').append($('<li>').text(userNameInput));
+                        $('#room-name').val(selectedUsers);
+                    } 
+                    else alert('No Such User');
+                });
+            }
+            
+            $('#search-text').val('');
+        });
+        
+        $('#submit').click(function(){
+            if (selectedUsers.length == 0) alert('Users empty');
+           
+            else{
+                var roomName = $('#room-name').val();
+                selectedUserIDs.push(<%=userID%>);
+                $.post('/addchat',{roomName:roomName, selectedUserIDs:selectedUserIDs});
+                window.location = '/chatlist'; 
+            }
+        });
+    </script>
+</body>
+</html>

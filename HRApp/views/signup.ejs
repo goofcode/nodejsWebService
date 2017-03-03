@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+    <title>HR App</title>
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <link rel="stylesheet" href="/css/style.css">
+    <% if(signupTry == 'success'){ %>
+    <script>
+        alert('Sign-up Request is submitted. Please Contact Manager.');
+        location.href='/';
+    </script>
+    <% } %>
+</head>
+<body>
+    <div class="header">
+        <div id="header-title"><h2>LLNNTMS Project - HR App</h2></div><br>
+        <ul class="nav nav-pills">
+            <li id="menu_home" role="presentation"><a href="/">Home</a></li>
+        </ul><br><br>
+    </div>    
+    <div class="container">
+        <div class="col-sm-6 col-sm-offset-3">
+            <h1><span class="fa fa-sign-in"></span> Signup</h1>
+        
+            <!-- LOGIN FORM -->
+            <form action="/signup" method="post">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" class="form-control" name="email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="password">
+                </div>
+                <div class="form-group">
+                    <label>Signup Code</label>
+                    <input type="password" class="form-control" name="code">
+                </div>
+                <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+                
+                <% if(signupTry == 'failed'){ %>
+                    <span class="label label-danger signup">signup failed</span>
+                    <% if(failReason == 'form'){ %>
+                        <script>alert('check your email form or password length(8~20)');</script>
+                    <% } %>
+                    <% if(failReason == 'overlap'){ %>
+                        <script>alert('account exists or request is submitted for this email');</script>
+                    <% } %>
+                 <% } %>
+            </form>
+                    
+            <hr>
+            <p>Already have an account? <a href="/login">Login</a></p>
+            <p>Or go <a href="/">home</a>.</p>
+        
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Chatter</title>
+	<meta name="viewport" content="width=device-width initial-scale=1">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+	<link rel="stylesheet" href="/css/style.css">    
+	<style>
+	  * { margin: 0; padding: 0; box-sizing: border-box; }
+	  body { font: 13px Helvetica, Arial; }
+	  form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+	  form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+	  form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+	  #messages { list-style-type: none; margin: 0; padding: 0; }
+	  #messages li { padding: 5px 10px; }
+	</style>
+  </head>
+  <body>
+	<div id= "container">
+	  <h2><%=roomName%></h2>
+	  <ul id="messages">
+		<% lastMessages.forEach(function(lastMessage){%>
+		  <li><%= lastMessage.userName%>: <%=lastMessage.text%></li>
+		<% });%>
+	  </ul>
+	  <div id="input-container"></div>
+		<form>
+		  <input id="message-input" autocomplete="off" /><button id="send">Send</button>
+		</form>
+	  </div>
+	</div>
+	<script src="//cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      	var socket = io();
+      	
+      	$('#send').click(function(){
+      		var msg = $('#message-input').val();
+      		
+      		if(msg.length != 0){
+      			var msgContent = {userID:<%=userID%>, userName:'<%=userName%>', roomID:<%=roomID%>, text:msg};
+      			$.post('/addmessage',msgContent);
+      			socket.emit('chat-message', msgContent);
+
+			}	
+      		
+        	$('#message-input').val('');
+        	
+        	return true;
+      	});
+      
+      	socket.on('chat-message', function(msgContent){
+        	$('#messages').append($('<li>').text(msgContent.userName + ': ' + msgContent.text));
+      	});
+	</script>    
+	</body>
+</html>

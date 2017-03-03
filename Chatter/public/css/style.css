@@ -1,0 +1,9 @@
+body{
+  background: url('/imgs/background.png');
+  background-repeat: repeat;
+  min-width: 320px;
+}
+
+.header{
+  margin-left: 30px;
+}
